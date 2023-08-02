@@ -1,0 +1,8 @@
+/.vs
+/x64
+/Сellular automata/x64
+
+*.sln
+*.vcxproj
+*.filters
+*.user
