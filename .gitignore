@@ -1,6 +1,7 @@
 /.vs
 /x64
 /Сellular automata/x64
+/Cellular automataTests/x64
 
 *.sln
 *.vcxproj
