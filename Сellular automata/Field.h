@@ -3,6 +3,7 @@
 #include <set>
 #include <vector>
 #include <bitset>
+#include <map>
 
 class Comparator
 {
@@ -22,16 +23,16 @@ class Field												//игровое поле
 {
 	std::set <Cells::Cell*, Comparator> data_;			//содержимое поля
 	int range_;											//дальность просмотра соседних клеток
-	unsigned char* diagonal_;							//какие диагональные клетки считать соседними
+	std::map<const unsigned int, Cells::Type*> types_;	//существующие типы
 	
 public:
 	Field() = delete;
-	explicit Field(int range, const std::vector <bool>& v = std::vector <bool>());
+	explicit Field(int range);
 	~Field();
 
 	int GetRange() const;
 	Cells::Cell* FindWithCoordinates(std::pair<int, int> coordinates) const;
-	bool IsChekableDiagonal(int number) const;
 	void AddCell(Cells::Cell* cell);
+	void AddType(Cells::Type* type);
 
 };

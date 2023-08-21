@@ -2,6 +2,9 @@
 /x64
 /Сellular automata/x64
 /Cellular automataTests/x64
+/PSD-PNG Resources
+/tools
+/Проекты видео
 
 *.sln
 *.vcxproj

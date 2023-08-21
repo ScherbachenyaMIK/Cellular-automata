@@ -1,34 +1,19 @@
 #include "Field.h"
 
-Field::Field(int range, const std::vector <bool>& v) : range_(range), diagonal_(new unsigned char[(range - 1) / 8 + 1])
+Field::Field(int range) : range_(range)
 {
-	for (int i = 0; i < (range - 1) / 8 + 1; ++i)
-	{
-		diagonal_[i] = 0;
-	}
-	unsigned char bit = 128;
-	int index = 0;
-	for (auto i : v)
-	{
-		if (i)
-		{
-			diagonal_[index / 8] |= bit;
-		}
-		++index;
-		if (bit != 1)
-		{
-			bit >>= 1;
-		}
-		else
-		{
-			bit = 128;
-		}
-	}
 }
 
 Field::~Field()
 {
-	delete[] diagonal_;
+	for (auto i : data_)
+	{
+		delete i;
+	}
+	for (auto i : types_)
+	{
+		delete i.second;
+	}
 }
 
 int Field::GetRange() const
@@ -50,12 +35,12 @@ Cells::Cell* Field::FindWithCoordinates(std::pair<int, int> coordinates) const
 	return nullptr;
 }
 
-bool Field::IsChekableDiagonal(int number) const
-{
-	return diagonal_[(number - 1) / 8] & (1 << (7 - ((number - 1) % 8)));
-}
-
 void Field::AddCell(Cells::Cell* cell)
 {
 	data_.insert(cell);
+}
+
+void Field::AddType(Cells::Type* type)
+{
+	types_.insert({ static_cast<unsigned int>(types_.size() + 1), type });
 }
